@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEFA, #FFB6C1); /* Gradient background */
+            font-family: 'Dancing Script', cursive; /* Original font for the rest */
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease; /* Smooth transition for the background and content */
+        }
+
+        #message {
+            font-size: 48px; /* Increased font size for the title */
+            margin-bottom: 40px;
+            text-align: center;
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Ensure buttons are spaced */
+            gap: 20px; /* Add space between the buttons */
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60%; /* Ensure the container doesn't take up full width */
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            font-family: 'Dancing Script', cursive;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            width: 45%; /* Each button takes up 45% of the width of the container */
+        }
+
+        #strongButton {
+            background-color: #6a5acd; /* Soft purple */
+            color: white;
+        }
+
+        #strongButton:hover {
+            background-color: #483d8b; /* Darker purple on hover */
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #giveUpButton {
+            background-color: #ff69b4; /* Soft pink */
+            color: white;
+            cursor: pointer;
+            position: relative;
+            transition: left 0.3s, top 0.3s; /* Smooth transition for movement */
+        }
+
+        #giveUpButton:hover {
+            background-color: #ff1493; /* Darker pink on hover */
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #giveUpButton:disabled {
+            background-color: #dcdcdc; /* Light gray when disabled */
+            cursor: not-allowed;
+        }
+
+        /* Styling for the motivational text in 𝓽𝓱𝓲𝓼 𝓯𝓸𝓷𝓽 */
+        #motivationalText {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff6347; /* Tomato color */
+            text-align: center;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace; /* Apply the font using Unicode */
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 25%; /* Positioning it a little higher */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Styling for the new screen after "Strong" button is clicked */
+        #yayScreen {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: white;
+            text-align: center;
+            font-size: 48px;
+            font-family: 'Courier New', monospace;
+            padding-top: 20%;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 1s ease-in-out;
+        }
+
+        #yayText {
+            font-size: 40px;
+            color: #ff6347; /* Bright red */
+            font-weight: bold;
+        }
+
+        /* Video background styles */
+        #yayScreen video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Put the video behind the content */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="message">Hiee Sheya, don't worry you are strong.</div>
+    <div class="button-container">
+        <button id="strongButton">Yesss, I am strong.. I love you!</button>
+        <button id="giveUpButton">No, I give up</button> <!-- Remove the disabled attribute initially -->
+    </div>
+
+    <!-- The div to display the motivational text in 𝓽𝓱𝓲𝓼 𝓯𝓸𝓷𝓽 -->
+    <div id="motivationalText">𝓝𝓤𝓘𝓘.. 𝓎𝓸𝓾 𝓪𝓻𝓮 𝓼𝓽𝓻𝓸𝓷𝓰𝓰.. 𝓾𝓻 𝓶𝔂 𝓢𝓣𝓡𝓞𝓝𝓖 𝓑𝓐𝓑𝓨</div>
+
+    <!-- The screen that shows after clicking "Strong" button -->
+    <div id="yayScreen">
+        <video autoplay loop muted>
+            <source src="file:///C:/Users/Admin/OneDrive/Desktop/New%20folder%20(2)/videoplayback.webm" type="video/webm">
+        </video>
+        <div id="yayText">YAYYYYYY!!!!!!! my Sheya is stronggg.. I LOB U SOOOO MUCHHHH!!!</div>
+    </div>
+
+    <!-- Music to be played when the button is clicked -->
+    <audio id="bgMusic" src="your-music-url.mp3" preload="auto"></audio>
+
+    <script>
+        // Enable the "Give Up" button when the "Strong" button is clicked
+        document.getElementById('strongButton').onclick = function() {
+            // Hide the motivational text when the "Strong" button is clicked
+            document.getElementById('motivationalText').style.display = 'none';
+
+            // Display the new screen with the image and text
+            document.getElementById('yayScreen').style.display = 'block';
+            document.getElementById('yayScreen').style.opacity = '1'; // Fade-in effect
+            document.getElementById('yayText').style.opacity = '1'; // Fade-in effect
+
+            // Play background music
+            document.getElementById('bgMusic').play();
+
+            // Hide the original buttons
+            document.querySelector('.button-container').style.display = 'none';
+            document.getElementById('message').style.display = 'none';
+        };
+
+        // Handle the "Give Up" button click and make it move randomly
+        document.getElementById('giveUpButton').onclick = function() {
+            let btn = this;
+            let maxWidth = window.innerWidth - btn.offsetWidth; // Max horizontal movement
+            let maxHeight = window.innerHeight - btn.offsetHeight; // Max vertical movement
+
+            // Move button randomly within bounds
+            let randomX = Math.random() * maxWidth;
+            let randomY = Math.random() * maxHeight;
+
+            btn.style.left = randomX + 'px';  // Set random horizontal position
+            btn.style.top = randomY + 'px';   // Set random vertical position
+
+            // Show the motivational text after the button is clicked
+            document.getElementById('motivationalText').style.display = 'block';
+            document.getElementById('motivationalText').style.opacity = '1'; // Fade-in effect
+        };
+    </script>
+
+</body>
+</html>
